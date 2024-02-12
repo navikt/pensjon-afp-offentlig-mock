@@ -1,9 +1,6 @@
 package no.nav.pensjon.afpoffentlig.mock.afp_offentlig_mock
 
-import org.springframework.web.bind.annotation.PostMapping
-import org.springframework.web.bind.annotation.RequestBody
-import org.springframework.web.bind.annotation.RequestMapping
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.*
 
 @RestController
 @RequestMapping("/api/hent-siste-ordning")
@@ -13,6 +10,14 @@ class SisteOrdningController {
         return SisteOrdningSoekResponse(
             3010
         )
+    }
+
+    @PutMapping("/mock/{fnr}")
+    fun mockForPerson(@PathVariable("fnr") fnr: String, @RequestBody response: SisteOrdningSoekResponse) {
+    }
+
+    @DeleteMapping("/mock/{fnr}")
+    fun slettMockForPerson(@PathVariable("fnr") fnr: String) {
     }
 
     data class SisteOrdningSoekRequest(

@@ -1,6 +1,9 @@
 package no.nav.pensjon.afpoffentlig.mock.afp_offentlig_mock
 
+import org.springframework.web.bind.annotation.DeleteMapping
+import org.springframework.web.bind.annotation.PathVariable
 import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.PutMapping
 import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RestController
@@ -21,6 +24,15 @@ class AfpOffentligStatusController {
             sluttdato = null,
             sistRegulert = LocalDate.now().minusYears(1).with(Month.MAY).withDayOfMonth(1),
         )
+    }
+
+    @PutMapping("/mock/{fnr}")
+    fun mockForPerson(@PathVariable("fnr") fnr: String, @RequestBody statusResponse: HentStatusResponse) {
+
+    }
+
+    @DeleteMapping("/mock/{fnr}")
+    fun slettMockForPerson(@PathVariable("fnr") fnr: String) {
     }
 
     data class HentStatusRequest(
