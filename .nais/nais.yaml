@@ -15,12 +15,13 @@ spec:
     max: 2
     min: 2
   gcp:
-    type: POSTGRES_15
-    name: pensjon-afp-offentlig-mock
-    pointInTimeRecovery: false
-    retainedBackups: 1
-    envVarPrefix: POSTGRES
-    sqlInstanceTier: db-f1-micro
+    sqlInstances:
+      - type: POSTGRES_15
+        databases:
+          - name: pensjon-afp-offentlig-mock
+            envVarPrefix: POSTGRES
+        pointInTimeRecovery: false
+        retainedBackups: 1
   liveness:
     path: "/actuator/health/liveness"
     initialDelay: 10
