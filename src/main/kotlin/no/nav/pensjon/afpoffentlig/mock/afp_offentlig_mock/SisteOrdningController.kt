@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.*
 @RestController
 @RequestMapping("/api/hent-siste-ordning")
 class SisteOrdningController {
-    @PostMapping("/soek")
+    @PostMapping("/{tenant}/soek")
     fun soekSisteOrdning(@RequestBody soekRequest: SisteOrdningSoekRequest): SisteOrdningSoekResponse {
         return SisteOrdningSoekResponse(
             3010
