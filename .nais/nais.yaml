@@ -22,6 +22,10 @@ spec:
             envVarPrefix: POSTGRES
         pointInTimeRecovery: false
         retainedBackups: 1
+  accessPolicy:
+    inbound:
+      rules:
+        - application: "pensjon-afp-offentlig-livsvarig-status-ruter"
   liveness:
     path: "/actuator/health/liveness"
     initialDelay: 10
