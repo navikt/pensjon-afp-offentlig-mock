@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*
 class SisteOrdningController(
     val sisteOrdningRepository: SisteOrdningRepository,
 ) {
-    @PostMapping("/{tenant}/soek")
+    @PostMapping("/soek")
     fun soekSisteOrdning(@RequestBody soekRequest: SisteOrdningSoekRequest): ResponseEntity<SisteOrdningSoekResponse> {
         return ResponseEntity.of(sisteOrdningRepository.findById(soekRequest.fnr).map { SisteOrdningSoekResponse(tpnr = it.tpnr) })
     }
