@@ -4,8 +4,8 @@ on:
     branches:
       - main
 jobs:
-  build_and_deploy:
-    name: Build, push and deploy
+  build:
+    name: Build and push image
     runs-on: ubuntu-latest
     permissions:
       contents: read
@@ -38,3 +38,31 @@ jobs:
           RESOURCE: .nais/nais.yaml
           VAR: image=${{ steps.docker-build-push.outputs.image }}
           VARS: .nais/vars-dev-q2.yaml
+
+  deploy:
+    permissions:
+      contents: "read"
+      id-token: "write"
+    if: github.ref == 'refs/heads/main'
+    needs: [build]
+    runs-on: 'ubuntu-latest'
+
+    strategy:
+      matrix:
+        include:
+          - name: pensjon-afp-offentlig-mock-q1
+            cluster: dev-gcp
+            vars: .nais/vars-dev-q1.yaml
+
+          - name: pensjon-afp-offentlig-mock-q2
+            cluster: dev-gcp
+            vars: .nais/vars-dev-q2.yaml
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: nais/deploy/actions/deploy@v2
+        name: 'Deploy to NAIS'
+        env:
+          RESOURCE: .nais/nais.yaml
+          CLUSTER: '${{ matrix.cluster }}'
+          VARS: ${{matrix.vars}}
