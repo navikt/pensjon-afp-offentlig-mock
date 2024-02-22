@@ -1,7 +1,7 @@
 app:
-  name: 'pensjon-afp-offentlig-mock'
-  ingress: 'https://pensjon-afp-offentlig-mock.intern.dev.nav.no'
-  database: 'pensjon-afp-offentlig-mock'
+  name: 'pensjon-afp-offentlig-mock-q2'
+  ingress: 'https://pensjon-afp-offentlig-mock-q2.intern.dev.nav.no'
+  database: 'pensjon-afp-offentlig-mock-q2'
 
 ruter:
   name: 'pensjon-afp-offentlig-livsvarig-status-ruter'
