@@ -10,6 +10,8 @@ jobs:
     permissions:
       contents: read
       id-token: write
+    outputs:
+      image: ${{ steps.docker-build-push.outputs.image }}
     steps:
       - uses: actions/checkout@v4
 
@@ -31,14 +33,6 @@ jobs:
           identity_provider: ${{ secrets.NAIS_WORKLOAD_IDENTITY_PROVIDER }}
           project_id: ${{ vars.NAIS_MANAGEMENT_PROJECT_ID }}
 
-      - name: Deploy to NAIS
-        uses: nais/deploy/actions/deploy@v2
-        env:
-          CLUSTER: dev-gcp
-          RESOURCE: .nais/nais.yaml
-          VAR: image=${{ steps.docker-build-push.outputs.image }}
-          VARS: .nais/vars-dev-q2.yaml
-
   deploy:
     permissions:
       contents: "read"
@@ -51,11 +45,9 @@ jobs:
       matrix:
         include:
           - name: pensjon-afp-offentlig-mock-q1
-            cluster: dev-gcp
             vars: .nais/vars-dev-q1.yaml
 
           - name: pensjon-afp-offentlig-mock-q2
-            cluster: dev-gcp
             vars: .nais/vars-dev-q2.yaml
 
     steps:
@@ -64,5 +56,6 @@ jobs:
         name: 'Deploy to NAIS'
         env:
           RESOURCE: .nais/nais.yaml
-          CLUSTER: '${{ matrix.cluster }}'
+          CLUSTER: dev-gcp
+          VAR: image="${{ needs.build.outputs.image }}"
           VARS: ${{matrix.vars}}
