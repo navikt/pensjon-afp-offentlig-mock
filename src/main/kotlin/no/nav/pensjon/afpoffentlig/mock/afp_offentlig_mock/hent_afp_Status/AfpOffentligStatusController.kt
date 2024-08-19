@@ -16,50 +16,109 @@ import kotlin.jvm.optionals.getOrNull
 class AfpOffentligStatusController(
     val hentAfpStatusRepository: HentAfpStatusRepository,
 ) {
+    @GetMapping("/tenants")
+    fun tenants(): TenantsResponse = TenantsResponse(
+        tenants = listOf(
+            Tenant(
+                id = "gabler",
+                name = "Gabler",
+            ),
+            Tenant(
+                id = "klp",
+                name = "KLP",
+            ),
+            Tenant(
+                id = "mpk",
+                name = "Maritim Pensjonskasse",
+            ),
+            Tenant(
+                id = "opf",
+                name = "Oslo Pensjonsforsikring",
+            ),
+            Tenant(
+                id = "spk",
+                name = "Statens pensjonskasse",
+            ),
+            Tenant(
+                id = "storebrand",
+                name = "Storebrand",
+            ),
+        )
+    )
+
     @GetMapping("/{tenant}/hentAfpStatus/{fnr}")
-    fun hentAfpOffentligStatus(@PathVariable("tenant") tenant: String, @PathVariable("fnr") fnr: String): HentAfpStatusDTO? {
-        return hentAfpStatusRepository.findById(HentAfpStatusId(tenant, fnr)).getOrNull()?.run {
+    fun hentAfpOffentligStatus(
+        @PathVariable("tenant") tenant: String,
+        @PathVariable("fnr") fnr: String
+    ): HentAfpStatusDTO? {
+        return hentAfpStatusRepository.findById(fnr).getOrNull()?.data?.firstOrNull { it.ordning == tenant }?.let {
             HentAfpStatusDTO(
                 fnr = fnr,
-                tpId = tpId,
-                statusAfp = statusAfp,
-                virkningsdato = virkningsdato,
-                belop = belop,
-                datoSistRegulert = datoSistRegulert
+                tpId = it.tpId,
+                statusAfp = it.statusAfp,
+                virkningsdato = it.virkningsdato,
+                belop = it.belop,
+                datoSistRegulert = it.datoSistRegulert
             )
         }
     }
 
-    @PutMapping("/{tenant}/mock/{fnr}")
-    fun mockForPerson(@PathVariable("tenant") tenant: String, @PathVariable("fnr") fnr: String, @RequestBody status: HentAfpStatusDTO) {
-        hentAfpStatusRepository.deleteById(HentAfpStatusId(tenant, fnr))
-        hentAfpStatusRepository.save(HentAfpStatus(
-            hentAfpStatusId = HentAfpStatusId(
-                tenant = tenant,
-                fnr = fnr
-            ),
-            tpId = status.tpId,
-            fnr = status.fnr,
-            statusAfp = status.statusAfp,
-            virkningsdato = status.virkningsdato,
-            belop = status.belop,
-            datoSistRegulert = status.datoSistRegulert,
-        ))
+    @GetMapping("/{fnr}")
+    fun hentMockForPerson(
+        @PathVariable("tenant") tenant: String,
+        @PathVariable("fnr") fnr: String
+    ): Mock? {
+        return hentAfpStatusRepository.findById(fnr).getOrNull()
     }
 
-    @DeleteMapping("/{tenant}/mock/{fnr}")
+    @PutMapping("/{fnr}")
+    fun lagreMockForPerson(
+        @PathVariable("tenant") tenant: String,
+        @PathVariable("fnr") fnr: String,
+        @RequestBody status: Mock
+    ) {
+        hentAfpStatusRepository.deleteById(fnr)
+        hentAfpStatusRepository.save(status)
+    }
+
+    @DeleteMapping("/{fnr}")
     fun slettMockForPerson(@PathVariable("tenant") tenant: String, @PathVariable("fnr") fnr: String) {
-        hentAfpStatusRepository.deleteById(HentAfpStatusId(tenant, fnr))
+        hentAfpStatusRepository.deleteById(fnr)
     }
 
     data class HentAfpStatusDTO(
         val fnr: String?,
         val tpId: String?,
         val statusAfp: String?,
-        @JsonFormat(pattern="yyyy-MM-dd", timezone = "Europe/Oslo")
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Oslo")
         val virkningsdato: LocalDate?,
         val belop: Int?,
-        @JsonFormat(pattern="yyyy-MM-dd", timezone = "Europe/Oslo")
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Oslo")
         val datoSistRegulert: LocalDate?,
     )
+
+    data class Mockdata(
+        val ordning: String,
+        val tpId: String?,
+        val statusAfp: String?,
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Oslo")
+        val virkningsdato: LocalDate?,
+        val belop: Int?,
+        @JsonFormat(pattern = "yyyy-MM-dd", timezone = "Europe/Oslo")
+        val datoSistRegulert: LocalDate?,
+    )
+
+    data class Mock(
+        val data: List<Mockdata>,
+    )
+
+    data class Tenant(
+        val id: String,
+        val name: String,
+    )
+
+    data class TenantsResponse(
+        val tenants: List<Tenant>
+    )
 }
+
