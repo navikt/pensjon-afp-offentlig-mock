@@ -26,6 +26,9 @@ spec:
     inbound:
       rules:
         - application: "{{ruter.name}}"
+        - application: testnav-pensjon-testdata-facade-proxy-trygdeetaten
+          namespace: dolly
+          cluster: dev-fss
   liveness:
     path: "/actuator/health/liveness"
     initialDelay: 10
