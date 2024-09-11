@@ -4,7 +4,7 @@ X-TPID: 3010
 
 
 ### Lagre mock-oppsett
-PUT {{baseUrl}}/api/afp-offentlig-status/12345678901
+PUT {{baseUrl}}/api/mock-oppsett/12345678901
 Content-Type: application/json
 
 {
@@ -67,8 +67,8 @@ Content-Type: application/json
 
 
 ### Slett mock-oppsett
-DELETE {{baseUrl}}/api/afp-offentlig-status/12345678901
+DELETE {{baseUrl}}/api/mock-oppsett/12345678901
 
 
 ### Hent mock-oppsett
-GET {{baseUrl}}/api/afp-offentlig-status/12345678901
+GET {{baseUrl}}/api/mock-oppsett/12345678901
