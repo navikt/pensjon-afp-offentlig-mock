@@ -29,6 +29,20 @@ spec:
         - application: testnav-pensjon-testdata-facade-proxy-trygdeetaten
           namespace: dolly
           cluster: dev-fss
+        - application: "pensjon-pen-q2"
+          namespace: "pensjon-q2"
+          cluster: "dev-fss"
+  maskinporten:
+    enabled: true
+    scopes:
+      exposes:
+        - product: pensjon
+          name: mock.livsvarig.afp.offentlig
+          enabled: true
+          atMaxAge: 120
+          consumers:
+            - name: NAV
+              orgno: "889640782"
   liveness:
     path: "/actuator/health/liveness"
     initialDelay: 10
