@@ -5,3 +5,8 @@ app:
 
 ruter:
   name: 'pensjon-afp-offentlig-livsvarig-status-ruter'
+
+pen:
+  name: 'pensjon-pen-q2'
+  namespace: 'pensjon-pen-q2'
+  cluster: 'dev-fss'

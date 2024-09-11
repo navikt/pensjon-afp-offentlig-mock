@@ -22,6 +22,7 @@ spec:
             envVarPrefix: POSTGRES
         pointInTimeRecovery: false
         retainedBackups: 1
+        tier: db-f1-micro
   accessPolicy:
     inbound:
       rules:
@@ -29,6 +30,20 @@ spec:
         - application: testnav-pensjon-testdata-facade-proxy-trygdeetaten
           namespace: dolly
           cluster: dev-fss
+        - application: "{{pen.name}}"
+          namespace: "{{pen.namespace}}"
+          cluster: "{{pen.cluster}}"
+  maskinporten:
+    enabled: true
+    scopes:
+      exposes:
+        - product: pensjon
+          name: mock.livsvarig.afp.offentlig
+          enabled: true
+          atMaxAge: 120
+          consumers:
+            - name: NAV
+              orgno: "889640782"
   liveness:
     path: "/actuator/health/liveness"
     initialDelay: 10
