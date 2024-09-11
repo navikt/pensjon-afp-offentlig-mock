@@ -1,0 +1,39 @@
+### Henter for SPK
+GET {{baseUrl}}/api/afp-offentlig-status/spk/hentAfpStatus/12345678901
+X-TPID: 3010
+
+
+### Lagre mock-oppsett
+PUT {{baseUrl}}/api/afp-offentlig-status/12345678901
+Content-Type: application/json
+
+{
+  "direktekall": [],
+  "mocksvar": [
+    {
+      "tpId": "3010",
+      "fnr": "12345678901",
+      "statusAfp": "INNVILGET",
+      "virkningsDato": "2024-02-01",
+      "sistBenyttetG": 120000,
+      "belopsListe": [
+        {
+          "fomDato": "2024-02-01",
+          "belop": 5000
+        },
+        {
+          "fomDato": "2024-05-01",
+          "belop": 5300
+        }
+      ]
+    }
+  ]
+}
+
+
+### Slett mock-oppsett
+DELETE {{baseUrl}}/api/afp-offentlig-status/12345678901
+
+
+### Hent mock-oppsett
+GET {{baseUrl}}/api/afp-offentlig-status/12345678901
