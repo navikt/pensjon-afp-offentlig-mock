@@ -22,6 +22,7 @@ spec:
             envVarPrefix: POSTGRES
         pointInTimeRecovery: false
         retainedBackups: 1
+        tier: db-f1-micro
   accessPolicy:
     inbound:
       rules:
