@@ -29,9 +29,9 @@ spec:
         - application: testnav-pensjon-testdata-facade-proxy-trygdeetaten
           namespace: dolly
           cluster: dev-fss
-        - application: "pensjon-pen-q2"
-          namespace: "pensjon-q2"
-          cluster: "dev-fss"
+        - application: "{{pen.name}}"
+          namespace: "{{pen.namespace}}"
+          cluster: "{{pen.cluster}}"
   maskinporten:
     enabled: true
     scopes:
