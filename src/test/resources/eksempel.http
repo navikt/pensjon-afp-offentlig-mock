@@ -8,7 +8,10 @@ PUT {{baseUrl}}/api/afp-offentlig-status/12345678901
 Content-Type: application/json
 
 {
-  "direktekall": [],
+  "direktekall": [
+    "3610",
+    "4510"
+  ],
   "mocksvar": [
     {
       "tpId": "3010",
@@ -26,6 +29,38 @@ Content-Type: application/json
           "belop": 5300
         }
       ]
+    },
+    {
+      "tpId": "3200",
+      "fnr": "12345678901",
+      "statusAfp": "SOKT",
+      "virkningsDato": "2024-02-01",
+      "sistBenyttetG": null,
+      "belopsListe": []
+    },
+    {
+      "tpId": "3660",
+      "fnr": "12345678901",
+      "statusAfp": "AVSLAG",
+      "virkningsDato": "2024-02-01",
+      "sistBenyttetG": null,
+      "belopsListe": []
+    },
+    {
+      "tpId": "3860",
+      "fnr": "12345678901",
+      "statusAfp": "IKKE_SOKT",
+      "virkningsDato": null,
+      "sistBenyttetG": null,
+      "belopsListe": []
+    },
+    {
+      "tpId": "3820",
+      "fnr": "12345678901",
+      "statusAfp": "UKJENT",
+      "virkningsDato": null,
+      "sistBenyttetG": null,
+      "belopsListe": []
     }
   ]
 }
