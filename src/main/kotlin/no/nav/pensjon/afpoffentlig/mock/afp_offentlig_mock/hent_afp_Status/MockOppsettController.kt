@@ -33,5 +33,16 @@ class MockOppsettController(
     fun slettMockForPerson(@PathVariable("fnr") fnr: String) {
         hentAfpStatusRepository.deleteById(fnr)
     }
+
+    @GetMapping("/muligedirektekall")
+    fun muligDirekteTpId(): MuligeDirektekallResponse {
+        return MuligeDirektekallResponse(
+            muligeDirekteKall = emptyList()
+        )
+    }
+
+    data class MuligeDirektekallResponse(
+        val muligeDirekteKall: List<String>
+    )
 }
 

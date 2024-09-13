@@ -72,3 +72,7 @@ DELETE {{baseUrl}}/api/mock-oppsett/12345678901
 
 ### Hent mock-oppsett
 GET {{baseUrl}}/api/mock-oppsett/12345678901
+
+
+### Mulige direkte kall
+GET {{baseUrl}}/api/mock-oppsett/muligedirektekall
