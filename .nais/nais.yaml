@@ -59,3 +59,8 @@ spec:
     requests:
       cpu: 50m
       memory: 256Mi
+  azure:
+    application:
+      allowAllUsers: true
+      enabled: true
+      tenant: trygdeetaten.no
