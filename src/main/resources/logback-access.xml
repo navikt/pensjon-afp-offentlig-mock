@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <appender name="access_stdout" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder class="net.logstash.logback.encoder.AccessEventCompositeJsonEncoder">
+            <providers>
+                <timestamp/>
+                <version/>
+                <method/>
+                <protocol/>
+                <statusCode/>
+                <requestedUrl/>
+                <requestedUri/>
+                <remoteHost/>
+                <contentLength/>
+                <elapsedTime/>
+
+                <threadName/>
+                <message/>
+            </providers>
+        </encoder>
+    </appender>
+
+    <appender-ref ref="access_stdout"/>
+</configuration>
