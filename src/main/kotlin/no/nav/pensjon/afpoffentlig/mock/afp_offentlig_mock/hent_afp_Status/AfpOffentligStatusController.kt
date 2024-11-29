@@ -12,7 +12,7 @@ import kotlin.jvm.optionals.getOrNull
 class AfpOffentligStatusController(
     val hentAfpStatusRepository: HentAfpStatusRepository,
 ) {
-    @GetMapping("/{tpNr}/hentAfpStatus/{fnr}/{uttaksdato}")
+    @GetMapping("/{tpNr}/hentAfpStatus/{fnr}")
     fun hentAfpOffentligStatus(
         @PathVariable("tpNr") tpNr: String,
         @PathVariable("fnr") fnr: String,
