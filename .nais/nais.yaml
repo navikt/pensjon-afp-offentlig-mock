@@ -64,3 +64,13 @@ spec:
       allowAllUsers: true
       enabled: true
       tenant: trygdeetaten.no
+  observability:
+    autoInstrumentation:
+      enabled: true
+      runtime: java
+      destinations:
+        - id: "grafana-lgtm"
+        - id: "elastic-apm"
+  env:
+    - name: OTEL_LOGS_EXPORTER
+      value: otlp
