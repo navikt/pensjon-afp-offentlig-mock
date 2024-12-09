@@ -70,7 +70,6 @@ spec:
       runtime: java
       destinations:
         - id: "grafana-lgtm"
-        - id: "elastic-apm"
   env:
     - name: OTEL_LOGS_EXPORTER
       value: otlp
