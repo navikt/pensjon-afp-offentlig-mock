@@ -33,9 +33,6 @@ spec:
         - application: "{{pen.name}}"
           namespace: "{{pen.namespace}}"
           cluster: "{{pen.cluster}}"
-        - application: pensjon-pen-q2
-          namespace: pensjon-q2
-          cluster: dev-fss
   maskinporten:
     enabled: true
     scopes:
