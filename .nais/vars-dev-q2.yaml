@@ -8,5 +8,5 @@ ruter:
 
 pen:
   name: 'pensjon-pen-q2'
-  namespace: 'pensjon-pen-q2'
+  namespace: 'pensjon-q2'
   cluster: 'dev-fss'
